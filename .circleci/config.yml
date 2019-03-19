@@ -287,9 +287,9 @@ jobs:
           command: |
             mkdir -p docker_images
             source .env
-            docker save ${CONTAINER_REGISTRY_BASE}/varnish > docker_images/varnish.tar
-            docker save ${CONTAINER_REGISTRY_BASE}/nginx > docker_images/nginx.tar
-            docker save ${CONTAINER_REGISTRY_BASE}/php > docker_images/php.tar
+            docker save quay.io/api-platform/varnish > docker_images/varnish.tar
+            docker save quay.io/api-platform/nginx > docker_images/nginx.tar
+            docker save quay.io/api-platform/php > docker_images/php.tar
             docker save postgres:10.6-alpine > docker_images/psql.tar
       - save_cache:
           name: Save Docker cache

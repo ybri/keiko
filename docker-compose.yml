@@ -2,14 +2,14 @@ version: "3.4"
 
 services:
   php:
-    image: ${CONTAINER_REGISTRY_BASE}/php
+    image: quay.io/api-platform/php
     build:
       context: ./backend
       target: api_platform_php
       cache_from:
-        - ${CONTAINER_REGISTRY_BASE}/php
-        - ${CONTAINER_REGISTRY_BASE}/nginx
-        - ${CONTAINER_REGISTRY_BASE}/varnish
+        - quay.io/api-platform/php
+        - quay.io/api-platform/nginx
+        - quay.io/api-platform/varnish
     depends_on:
       - db
       - db-test
@@ -23,14 +23,14 @@ services:
       PHP_IDE_CONFIG: serverName=PHPSTORM
 
   api:
-    image: ${CONTAINER_REGISTRY_BASE}/nginx
+    image: quay.io/api-platform/nginx
     build:
       context: ./backend
       target: api_platform_nginx
       cache_from:
-        - ${CONTAINER_REGISTRY_BASE}/php
-        - ${CONTAINER_REGISTRY_BASE}/nginx
-        - ${CONTAINER_REGISTRY_BASE}/varnish
+        - quay.io/api-platform/php
+        - quay.io/api-platform/nginx
+        - quay.io/api-platform/varnish
     depends_on:
       - php
     # Comment out this volume in production
@@ -40,14 +40,14 @@ services:
       - "8000:80"
 
   cache-proxy:
-    image: ${CONTAINER_REGISTRY_BASE}/varnish
+    image: quay.io/api-platform/varnish
     build:
       context: ./backend
       target: api_platform_varnish
       cache_from:
-        - ${CONTAINER_REGISTRY_BASE}/php
-        - ${CONTAINER_REGISTRY_BASE}/nginx
-        - ${CONTAINER_REGISTRY_BASE}/varnish
+        - quay.io/api-platform/php
+        - quay.io/api-platform/nginx
+        - quay.io/api-platform/varnish
     depends_on:
       - api
     volumes:
@@ -75,9 +75,9 @@ services:
   db-test:
     image: postgres:10.6-alpine
     environment: # Credentials must differ from the main database in order to avoid what we call in France "Programmation par coïncidence"
-    - POSTGRES_DB=seed
-    - POSTGRES_USER=seed
-    - POSTGRES_PASSWORD=Ge0rgesMoustaki
+      - POSTGRES_DB=seed
+      - POSTGRES_USER=seed
+      - POSTGRES_PASSWORD=Ge0rgesMoustaki
 
   h2-proxy:
     # Don't use this proxy in prod
