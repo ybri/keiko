@@ -9,10 +9,9 @@
     "click-me": "Click sur moi",
     "readme": "Lis le README.md pour découvrir les super commandes npm que nous avons ajouté"
   },
-    "page": {
-      "back": "Retour",
-      "api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl",
-      "fetch-github-avatar": "Affiche l'avatar github",
-      "add-github-username": "Entrer un username github"
-    }
+  "page": {
+    "back": "Retour",
+    "api-to-translate-example": "Ce message est traduit en utilisant directement l'API react-intl",
+    "add-github-username": "Entrer un username github"
+  }
 }

@@ -6,7 +6,7 @@ import fr from 'react-intl/locale-data/fr';
 import { flattenMessages } from 'services/i18n/intl';
 import enMessages from 'translations/en.json';
 import frMessages from 'translations/fr.json';
-import StyledRoot from './Root.style';
+import Style from './Root.style';
 
 const locales = {
   fr: flattenMessages(frMessages),
@@ -21,14 +21,17 @@ interface Props {
 
 const Root: React.FunctionComponent<Props> = ({ children }) => (
   <IntlProvider locale="fr" messages={locales.fr}>
-    <StyledRoot>
-      <header className="header">
-          <div className="header__wrapper">
-              <img className="logo" src="https://fontmeme.com/permalink/190314/03655fc9c0c5ef371245622978eaa0a7.png" alt="pokemon-go-font" />
-          </div>
-      </header>
+    <Style.Wrapper>
+      <Style.Header>
+        <Style.HeaderWrapper>
+          <Style.Logo
+            src="https://fontmeme.com/permalink/190314/03655fc9c0c5ef371245622978eaa0a7.png"
+            alt="pokemon-go-font"
+          />
+        </Style.HeaderWrapper>
+      </Style.Header>
       {children}
-    </StyledRoot>
+    </Style.Wrapper>
   </IntlProvider>
 );
 
