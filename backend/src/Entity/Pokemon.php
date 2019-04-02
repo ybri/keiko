@@ -24,11 +24,6 @@ class Pokemon
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=180)
-     */
-    private $spriteUrl;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -48,21 +43,5 @@ class Pokemon
     public function setName($name): void
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSpriteUrl()
-    {
-        return $this->spriteUrl;
-    }
-
-    /**
-     * @param mixed $spriteUrl
-     */
-    public function setSpriteUrl($spriteUrl): void
-    {
-        $this->spriteUrl = $spriteUrl;
     }
 }
