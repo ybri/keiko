@@ -24,6 +24,16 @@ class Pokemon
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $weight;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $height;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -43,5 +53,37 @@ class Pokemon
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param mixed $height
+     */
+    public function setHeight($height): void
+    {
+        $this->height = $height;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param mixed $weight
+     */
+    public function setWeight($weight): void
+    {
+        $this->weight = $weight;
     }
 }
