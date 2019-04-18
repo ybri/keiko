@@ -1,3 +1,0 @@
-say_hello:
-    path: /api/pokemon
-    controller: App\Controller\PokemonController::sayHello
