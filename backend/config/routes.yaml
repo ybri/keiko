@@ -1,3 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+say_hello:
+    path: /api/pokemon
+    controller: App\Controller\PokemonController::sayHello
