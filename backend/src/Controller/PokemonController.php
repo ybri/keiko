@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use App\Entity\Pokemon;
 
+/**
+ * @Route("/api/pokemon")
+ */
 class PokemonController
 {
     private $normalizer;
@@ -17,7 +20,7 @@ class PokemonController
     }
 
     /**
-     * @Route("/api/pokemon", methods={"GET"})
+     * @Route("", methods={"GET"})
      */
     public function get(): JsonResponse
     {
@@ -32,7 +35,7 @@ class PokemonController
     }
 
     /**
-     * @Route("/api/pokemon", methods={"POST"})
+     * @Route("", methods={"POST"})
      */
     public function create(): Response
     {
