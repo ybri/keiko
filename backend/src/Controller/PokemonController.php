@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -16,7 +17,7 @@ class PokemonController
     }
 
     /**
-     * @Route("/api/pokemon")
+     * @Route("/api/pokemon", methods={"GET"})
      */
     public function get(): JsonResponse
     {
@@ -28,5 +29,13 @@ class PokemonController
         $response = $this->normalizer->normalize($pokemon, 'json');
 
         return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/api/pokemon", methods={"POST"})
+     */
+    public function create(): Response
+    {
+        return new Response("Hello World");
     }
 }
