@@ -2,20 +2,27 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+ /**
+ * @ORM\Entity()
+ */
 class Pokemon
 {
     /**
-     * @var int $id
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string $name
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @var int $weight
+     * @ORM\Column(type="integer")
      */
     private $weight;
 
