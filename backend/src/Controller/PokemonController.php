@@ -36,6 +36,21 @@ class PokemonController
     }
 
     /**
+     * @Route("/{id}", methods={"GET"})
+     */
+    public function findOne(string $id): JsonResponse
+    {
+        $pokemonRepository = $this->entityManager->getRepository(Pokemon::class);
+
+        $pokemon = $pokemonRepository->findOneById($id);
+
+        $response = $this->normalizer->normalize($pokemon, 'json');
+
+        return new JsonResponse($response);
+    }
+
+
+    /**
      * @Route("", methods={"POST"})
      */
     public function create(): JsonResponse
