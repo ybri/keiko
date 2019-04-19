@@ -6,9 +6,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
  /**
- * @ApiResource
+ * @ApiResource(
+ *     normalizationContext={"groups"={"pokemon_read"}}
+ * )
  * @ORM\Entity()
  */
 class Pokemon
@@ -17,17 +20,20 @@ class Pokemon
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"pokemon_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pokemon_read"})
      * @Assert\NotNull
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"pokemon_read"})
      * @Assert\NotNull
      * @Assert\GreaterThan(0)
      */
@@ -35,6 +41,7 @@ class Pokemon
 
     /**
      * @ORM\ManyToMany(targetEntity="Ability")
+     * @Groups({"pokemon_read"})
      */
     private $abilities;
 
