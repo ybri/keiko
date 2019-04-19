@@ -24,14 +24,13 @@ class PokemonController
     /**
      * @Route("", methods={"GET"})
      */
-    public function get(): JsonResponse
+    public function findAll(): JsonResponse
     {
-        $pokemon = new Pokemon();
-        $pokemon->setId(1);
-        $pokemon->setName("bulbasaur");
-        $pokemon->setWeight(67);
+        $pokemonRepository = $this->entityManager->getRepository(Pokemon::class);
 
-        $response = $this->normalizer->normalize($pokemon, 'json');
+        $pokemons = $pokemonRepository->findAll();
+
+        $response = $this->normalizer->normalize($pokemons, 'json');
 
         return new JsonResponse($response);
     }
