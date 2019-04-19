@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
  /**
  * @ORM\Entity()
@@ -18,11 +19,14 @@ class Pokemon
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
+     * @Assert\GreaterThan(0)
      */
     private $weight;
 
