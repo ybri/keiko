@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -40,6 +41,18 @@ class Pokemon
      */
     private $height;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Ability")
+     *
+     * @var ArrayCollection $abilities
+     */
+    private $abilities;
+
+    public function __construct()
+    {
+        $this->abilities = new ArrayCollection();
+
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -91,5 +104,15 @@ class Pokemon
     public function setWeight($weight): void
     {
         $this->weight = $weight;
+    }
+
+    public function getAbilities()
+    {
+        return $this->abilities;
+    }
+
+    public function setAbilities($abilities)
+    {
+        $this->abilities = $abilities;
     }
 }
