@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,6 +17,7 @@ class Ability
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"pokemon_read"})
      *
      * @var int $id
      */
@@ -23,6 +25,7 @@ class Ability
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"pokemon_read"})
      * @Assert\NotNull
      *
      * @var string $name
