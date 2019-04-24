@@ -37,14 +37,11 @@ class PokemonController
      *
      * @return JsonResponse
      */
-    public function get(): JsonResponse
+    public function getAll(): JsonResponse
     {
-        $pokemon = new Pokemon();
-        $pokemon->setName('jean-michel');
-        $pokemon->setWeight(100);
-        $pokemon->setHeight(100);
-
-        $response = $this->normalizer->normalize($pokemon, 'json');
+        $pokemonRepository = $this->entityManager->getRepository(Pokemon::class);
+        $pokemons = $pokemonRepository->findAll();
+        $response = $this->normalizer->normalize($pokemons, 'json');
 
         return new JsonResponse($response);
     }
