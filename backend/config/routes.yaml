@@ -1,3 +1,0 @@
-hello_world:
-  path: /pokemon
-  controller: App\Controller\PokemonController::helloWorld
