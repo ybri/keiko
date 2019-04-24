@@ -5,9 +5,11 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Entity\Pokemon;
 
 /**
@@ -31,18 +33,26 @@ class PokemonController
     private $serializer;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * @param NormalizerInterface    $normalizer
      * @param EntityManagerInterface $entityManager
      * @param SerializerInterface    $serializer
+     * @param ValidatorInterface     $validator
      */
     public function __construct(
         NormalizerInterface $normalizer,
         EntityManagerInterface $entityManager,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        ValidatorInterface $validator
     ) {
         $this->normalizer = $normalizer;
         $this->entityManager = $entityManager;
         $this->serializer = $serializer;
+        $this->validator = $validator;
     }
 
     /**
@@ -83,6 +93,11 @@ class PokemonController
     public function create(Request $request): JsonResponse
     {
         $pokemon = $this->serializer->deserialize($request->getContent(), Pokemon::class, 'json');
+
+        $violations = $this->validator->validate($pokemon);
+        if (0 !== count($violations)) {
+           throw new BadRequestHttpException($violations);
+        }
 
         $this->entityManager->persist($pokemon);
         $this->entityManager->flush();
