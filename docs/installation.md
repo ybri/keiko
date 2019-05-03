@@ -1,5 +1,7 @@
 # Installation
 
+** :warning: Execute the following commands into your project directory**
+
 In development:
 - webpack-dev-server listens on the port 3000
   - it serves your frontend app's bundle.js
