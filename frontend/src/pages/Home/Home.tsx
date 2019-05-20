@@ -2,12 +2,32 @@ import * as React from 'react';
 
 import Pokemon from 'components/Pokemon';
 import Style from './Home.style';
+import { makeGetRequest } from 'services/networking/request';
 
-class Home extends React.Component {
+interface Props {}
+interface State {
+  pokemons: {
+    name: string;
+    id: number;
+  }[];
+}
+
+class Home extends React.Component<Props, State> {
+  state: Readonly<State> = {
+    pokemons: [],
+  };
+
+  componentDidMount = () => {
+    makeGetRequest('pokemon')
+      .then(response => response.body)
+      .then(pokemons => this.setState({ pokemons }));
+  };
+
   render(): React.ReactNode {
     return (
       <Style.Intro>
-        <Pokemon name="Carapuce" id={7} />
+        {this.state.pokemons &&
+          this.state.pokemons.map(pokemon => <Pokemon name={pokemon.name} id={pokemon.id} />)}
       </Style.Intro>
     );
   }
