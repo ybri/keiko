@@ -13,12 +13,8 @@ interface State {
 }
 
 class Home extends React.Component<Props, State> {
-  state: Readonly<State> = {
-    pokemons: [],
-  };
-
   componentDidMount = () => {
-    makeGetRequest('pokemon')
+    makeGetRequest('/pokemon')
       .then(response => response.body)
       .then(pokemons => this.setState({ pokemons }));
   };
@@ -26,8 +22,11 @@ class Home extends React.Component<Props, State> {
   render(): React.ReactNode {
     return (
       <Style.Intro>
-        {this.state.pokemons &&
-          this.state.pokemons.map(pokemon => <Pokemon name={pokemon.name} id={pokemon.id} />)}
+        {this.state &&
+          this.state.pokemons &&
+          this.state.pokemons.map(pokemon => (
+            <Pokemon key={pokemon.id} name={pokemon.name} id={pokemon.id} />
+          ))}
       </Style.Intro>
     );
   }
