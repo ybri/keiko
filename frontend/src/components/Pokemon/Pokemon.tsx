@@ -1,27 +1,30 @@
 import * as React from 'react';
 
-import { Container } from './Pokemon.style';
+import { PokemonApi } from './Pokemon.type';
+import { Container, Text, Title } from './Pokemon.style';
 
 interface Props {
-  name: string;
-  id: number;
+  className?: string;
+  pokemon: PokemonApi;
 }
 
 class Pokemon extends React.Component<Props> {
   render(): React.ReactNode {
+    const { className, pokemon } = this.props;
+
     return (
-      <div>
-      <Container>
-        <p>Voici mon premier pokemon:</p>
-        <p>
-          {this.props.name}: n°{this.props.id}
-        </p>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-            this.props.id
-          }.png`}
-        />
-      </div>
+      <Container className={className}>
+        <Title>{pokemon.name}</Title>
+        <div>
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              pokemon.id
+            }.png`}
+          />
+        </div>
+        <Text>Id: {pokemon.id}</Text>
+        <Text>Weight: {pokemon.weight / 10} kg</Text>
+        <Text>Height: {pokemon.height * 10} cm</Text>
       </Container>
     );
   }
