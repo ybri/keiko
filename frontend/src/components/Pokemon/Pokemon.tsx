@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Container } from './Pokemon.style';
+
 interface Props {
   name: string;
   id: number;
@@ -9,6 +11,7 @@ class Pokemon extends React.Component<Props> {
   render(): React.ReactNode {
     return (
       <div>
+      <Container>
         <p>Voici mon premier pokemon:</p>
         <p>
           {this.props.name}: n°{this.props.id}
@@ -19,6 +22,7 @@ class Pokemon extends React.Component<Props> {
           }.png`}
         />
       </div>
+      </Container>
     );
   }
 }
