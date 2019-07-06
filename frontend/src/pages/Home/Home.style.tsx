@@ -19,6 +19,13 @@ export const StyledPokemon = styled(Pokemon)`
   margin: 10px;
 `;
 
+export const StyledText = styled.p`
+  color: red;
+  font-family: 'Pokemon', Sans-Serif;
+  font-size: 15px;
+  margin-bottom: 10px;
+`;
+
 export const StyledTitle = styled.p`
   font-size: 30px;
   font-family: 'Pokemon', Sans-Serif;
