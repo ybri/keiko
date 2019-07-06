@@ -1,39 +1,51 @@
 import * as React from 'react';
 
 import { PokemonApi } from 'components/Pokemon/Pokemon.type';
-import { StyledContainer, StyledPokemon, StyledPokemonContainer, StyledTitle } from './Home.style';
+import {
+  StyledContainer,
+  StyledPokemon,
+  StyledPokemonContainer,
+  StyledText,
+  StyledTitle,
+} from './Home.style';
 import { makeGetRequest } from 'services/networking/request';
 
 interface Props {}
 interface State {
-  pokemons: PokemonApi[];
+  error: boolean;
   isLoading: boolean;
+  pokemons: PokemonApi[];
 }
 
 class Home extends React.Component<Props, State> {
   state: Readonly<State> = {
-    pokemons: [],
+    error: false,
     isLoading: true,
+    pokemons: [],
   };
 
   componentDidMount = () => {
     makeGetRequest('/pokemon')
       .then(response => response.body)
-      .then(pokemons => this.setState({ pokemons, isLoading: false }));
+      .then(pokemons => this.setState({ pokemons, isLoading: false }))
+      .catch(() => this.setState({ error: true, isLoading: false }));
   };
 
   render(): React.ReactNode {
+    const { error, isLoading, pokemons } = this.state;
     return (
       <StyledContainer>
         <StyledTitle>Pokedex</StyledTitle>
         <StyledPokemonContainer>
-          {this.state.isLoading || !this.state.isLoading ? (
+          {error && <StyledText>An error occurred while fetching the pokemons</StyledText>}
+          {isLoading && (
             <div>
               <img src="./loader.svg" width={300} />
             </div>
-          ) : (
+          )}
+          {!error && !isLoading && (
             <>
-              {this.state.pokemons.map(pokemon => (
+              {pokemons.map(pokemon => (
                 <StyledPokemon key={pokemon.id} pokemon={pokemon} />
               ))}
             </>
