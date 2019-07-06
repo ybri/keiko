@@ -27,7 +27,7 @@ export const StyledText = styled.p`
 `;
 
 export const StyledTitle = styled.p`
-  font-size: 30px;
   font-family: 'Pokemon', Sans-Serif;
+  font-size: 30px;
   margin-bottom: 30px;
 `;
