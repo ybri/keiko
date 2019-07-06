@@ -12,16 +12,16 @@ import { makeGetRequest } from 'services/networking/request';
 
 interface Props {}
 interface State {
-  pokemons: PokemonApi[];
   error: boolean;
   isLoading: boolean;
+  pokemons: PokemonApi[];
 }
 
 class Home extends React.Component<Props, State> {
   state: Readonly<State> = {
-    pokemons: [],
     error: false,
     isLoading: true,
+    pokemons: [],
   };
 
   componentDidMount = () => {
